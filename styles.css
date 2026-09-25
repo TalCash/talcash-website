@@ -1,0 +1,589 @@
+/* TalCash: security-paper palette, one day of blocks as the signature. */
+
+:root {
+  --paper: #edf1ee;      /* cool banknote paper */
+  --panel: #e1e8e4;
+  --ink: #14262b;        /* text */
+  --ink-soft: #4a5e63;
+  --teal: #0f5c5e;       /* intaglio ink: blocks already found */
+  --red: #c23a2b;        /* serial-number red: the current block */
+  --cell: #d3ddd9;       /* blocks still to come */
+  --rule: #c5d0cb;
+
+  --mono: ui-monospace, "Cascadia Mono", "Cascadia Code", "SF Mono", "JetBrains Mono", Menlo, Consolas,
+    "DejaVu Sans Mono", monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --page: min(1120px, 100% - 2 * clamp(16px, 4vw, 40px));
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0d1a1d;
+    --panel: #132529;
+    --ink: #e3ebe7;
+    --ink-soft: #9cb0ab;
+    --teal: #4fb8ae;
+    --red: #ff6a55;
+    --cell: #1d3337;
+    --rule: #24393d;
+    color-scheme: dark;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.0625rem/1.6 var(--sans);
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  color: var(--teal);
+  text-underline-offset: 0.18em;
+}
+
+a:focus-visible,
+.button:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+  top: 8px;
+  padding: 8px 12px;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.skip:focus {
+  left: 8px;
+  z-index: 10;
+}
+
+/* --- notice and header ------------------------------------------------------ */
+
+.notice {
+  margin: 0;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: var(--paper);
+  font: 400 0.8125rem/1.5 var(--mono);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.top {
+  width: var(--page);
+  margin: 0 auto;
+  padding: 22px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  text-decoration: none;
+  font: 700 1.25rem/1 var(--mono);
+  letter-spacing: -0.03em;
+}
+
+.mark {
+  width: 22px;
+  height: 22px;
+}
+
+.mark .past {
+  fill: var(--teal);
+}
+
+.mark .now {
+  fill: var(--red);
+}
+
+.mark .later {
+  fill: var(--cell);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  font: 500 0.9375rem/1.4 var(--sans);
+}
+
+.nav a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: var(--teal);
+  text-decoration: underline;
+}
+
+/* --- hero --------------------------------------------------------------------- */
+
+main {
+  width: var(--page);
+  margin: 0 auto;
+}
+
+.hero {
+  display: grid;
+  gap: clamp(36px, 6vw, 72px);
+  align-items: center;
+  padding: clamp(28px, 6vw, 72px) 0 clamp(20px, 4vw, 40px);
+}
+
+@media (min-width: 960px) {
+  .hero {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  }
+}
+
+.eyebrow,
+.label {
+  margin: 0;
+  color: var(--ink-soft);
+  font: 500 0.75rem/1.4 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 14px 0 20px;
+  font: 700 clamp(2.25rem, 1.3rem + 3.6vw, 3.6rem)/1.04 var(--mono);
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.lede {
+  margin: 0;
+  max-width: 34em;
+  color: var(--ink-soft);
+  font-size: 1.1875rem;
+  line-height: 1.55;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.button {
+  display: inline-block;
+  padding: 11px 18px;
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+  color: var(--ink);
+  font: 600 0.9375rem/1.2 var(--mono);
+  text-decoration: none;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.button:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.button.primary {
+  border-color: var(--teal);
+  background: var(--teal);
+  color: var(--paper);
+}
+
+.button.primary:hover {
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+/* --- today: one day of blocks ---------------------------------------------------- */
+
+.today {
+  margin: 0;
+  padding: clamp(16px, 2.5vw, 24px);
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+}
+
+.today-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.count {
+  font: 600 0.875rem/1.3 var(--mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.count b {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.today-body {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+}
+
+/* Hour labels at rows 0, 6, 12 and 18: a quarter of the grid apart. */
+.hours {
+  position: relative;
+  width: 1.4em;
+  color: var(--ink-soft);
+  font: 500 0.625rem/1 var(--mono);
+}
+
+.hours span {
+  position: absolute;
+  left: 0;
+}
+
+.hours span:nth-child(1) { top: 0; }
+.hours span:nth-child(2) { top: 25%; }
+.hours span:nth-child(3) { top: 50%; }
+.hours span:nth-child(4) { top: 75%; }
+
+.day {
+  display: grid;
+  grid-template-columns: repeat(60, minmax(0, 1fr));
+  gap: 2px;
+}
+
+/* Without JavaScript: the same grid, drawn as a pattern. */
+.day:empty {
+  aspect-ratio: 60 / 24;
+  background-color: var(--cell);
+  background-image:
+    linear-gradient(to right, var(--panel) 2px, transparent 2px),
+    linear-gradient(to bottom, var(--panel) 2px, transparent 2px);
+  background-size: calc(100% / 60) calc(100% / 24);
+}
+
+.day i {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 1px;
+  background: var(--cell);
+}
+
+.day i.past {
+  background: var(--teal);
+}
+
+.day i.now {
+  background: var(--red);
+  animation: blink 1.6s ease-in-out infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.today figcaption {
+  margin-top: 14px;
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Phones: 40 minutes per row instead of 60, so the squares stay visible.
+   36 rows still put 06:00, 12:00 and 18:00 exactly a quarter of the way down each. */
+@media (max-width: 600px) {
+  .day {
+    grid-template-columns: repeat(40, minmax(0, 1fr));
+    gap: 1.5px;
+  }
+
+  .day:empty {
+    aspect-ratio: 40 / 36;
+    background-size: calc(100% / 40) calc(100% / 36);
+  }
+
+  .notice-more {
+    display: none;
+  }
+}
+
+/* --- sections -------------------------------------------------------------------- */
+
+.block {
+  padding: clamp(48px, 8vw, 88px) 0 0;
+}
+
+h2 {
+  margin: 0 0 28px;
+  font: 700 clamp(1.5rem, 1.1rem + 1.4vw, 2rem)/1.15 var(--mono);
+  letter-spacing: -0.035em;
+}
+
+/* the numbers: a ledger with dotted leaders */
+
+.ledger dl {
+  display: grid;
+  gap: 0 56px;
+  margin: 0;
+  border-top: 1.5px solid var(--ink);
+}
+
+@media (min-width: 760px) {
+  .ledger dl {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(5, auto);
+  }
+}
+
+.ledger dl {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.ledger dl div {
+  display: flex;
+  align-items: baseline;
+  padding: 9px 0;
+}
+
+.ledger dt {
+  display: flex;
+  flex: 1;
+  align-items: baseline;
+  gap: 10px;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+.ledger dt::after {
+  content: "";
+  flex: 1;
+  min-width: 24px;
+  margin-right: 10px;
+  border-bottom: 2px dotted var(--rule);
+}
+
+.ledger dd {
+  margin: 0;
+  font: 600 0.9375rem/1.4 var(--mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* how it works */
+
+.points {
+  display: grid;
+  gap: 36px 56px;
+}
+
+@media (min-width: 760px) {
+  .points {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.point h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 8px;
+  font: 650 1.125rem/1.35 var(--sans);
+}
+
+.point h3::before {
+  content: "";
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 1px;
+  background: var(--teal);
+  transform: translateY(-1px);
+}
+
+.point p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+/* try it */
+
+.intro {
+  max-width: 40em;
+  margin: -12px 0 28px;
+  color: var(--ink-soft);
+}
+
+.steps {
+  display: grid;
+  gap: 22px;
+  max-width: 46em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr);
+  counter-increment: step;
+}
+
+.steps li::before {
+  content: counter(step);
+  grid-row: 1 / span 3;
+  color: var(--teal);
+  font: 700 1.125rem/1.5 var(--mono);
+}
+
+.step-title {
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+.steps pre {
+  margin: 0;
+  padding: 12px 16px;
+  overflow-x: auto;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--teal);
+  border-radius: 3px;
+  font: 400 0.9rem/1.6 var(--mono);
+}
+
+.step-note {
+  margin: 8px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+/* roadmap: the same three states as the day grid */
+
+.road {
+  display: grid;
+  gap: 0;
+  max-width: 40em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1.5px solid var(--ink);
+}
+
+.road li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.road li::before {
+  content: "";
+  flex: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 1px;
+  background: var(--cell);
+}
+
+.road .done {
+  color: var(--ink-soft);
+}
+
+.road .done::before {
+  background: var(--teal);
+}
+
+.road .now {
+  font-weight: 650;
+}
+
+.road .now::before {
+  background: var(--red);
+}
+
+.tag {
+  padding: 2px 7px;
+  border: 1px solid var(--red);
+  border-radius: 3px;
+  color: var(--red);
+  font: 600 0.6875rem/1.4 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* 404 page */
+
+.missing {
+  padding: 18vh 0;
+}
+
+/* --- footer -------------------------------------------------------------------- */
+
+.foot {
+  width: var(--page);
+  margin: clamp(64px, 10vw, 112px) auto 0;
+  padding: 28px 0 40px;
+  border-top: 1.5px solid var(--ink);
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+}
+
+.foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.foot p {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .day i.now {
+    animation: none;
+  }
+
+  .button {
+    transition: none;
+  }
+}

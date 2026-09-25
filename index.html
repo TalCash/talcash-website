@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TalCash · A coin your computer can mine</title>
+  <meta name="description" content="TalCash is a proof-of-work cryptocurrency anyone can mine with an ordinary computer: one block a minute, 10 TC per block, for as long as the network runs.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#edf1ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1a1d" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://talcash.com/">
+  <meta property="og:title" content="TalCash · A coin your computer can mine">
+  <meta property="og:description" content="One block a minute, 10 TC each, mined with memory-hard Argon2id so an ordinary CPU stays in the race.">
+  <link rel="canonical" href="https://talcash.com/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="day.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <p class="notice"><strong>In development.</strong> Mainnet hasn't launched and no TalCash is for sale anywhere.
+    <span class="notice-more">The only official places are talcash.com and github.com/TalCash.</span></p>
+
+  <header class="top">
+    <a class="brand" href="./" aria-label="TalCash home">
+      <svg class="mark" viewBox="0 0 15 15" aria-hidden="true">
+        <rect class="past" x="0" y="0" width="3" height="3"/><rect class="past" x="4" y="0" width="3" height="3"/>
+        <rect class="past" x="8" y="0" width="3" height="3"/><rect class="past" x="12" y="0" width="3" height="3"/>
+        <rect class="past" x="0" y="4" width="3" height="3"/><rect class="past" x="4" y="4" width="3" height="3"/>
+        <rect class="past" x="8" y="4" width="3" height="3"/><rect class="past" x="12" y="4" width="3" height="3"/>
+        <rect class="past" x="0" y="8" width="3" height="3"/><rect class="now" x="4" y="8" width="3" height="3"/>
+        <rect class="later" x="8" y="8" width="3" height="3"/><rect class="later" x="12" y="8" width="3" height="3"/>
+        <rect class="later" x="0" y="12" width="3" height="3"/><rect class="later" x="4" y="12" width="3" height="3"/>
+        <rect class="later" x="8" y="12" width="3" height="3"/><rect class="later" x="12" y="12" width="3" height="3"/>
+      </svg>
+      <span>TalCash</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#try">Try it</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="https://github.com/TalCash/TalCash">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">Proof-of-work cryptocurrency</p>
+        <h1>A coin your computer can mine.</h1>
+        <p class="lede">One block every minute, 10&nbsp;TC each, for as long as the network runs.
+          Every hash needs 4&nbsp;MiB of fast memory, so mining chips don't pay off and an ordinary
+          CPU stays in the race.</p>
+        <div class="actions">
+          <a class="button primary" href="https://github.com/TalCash/TalCash">Read the code</a>
+          <a class="button" href="https://github.com/TalCash/TalCash/blob/master/docs/PROTOCOL.md">Read the protocol</a>
+        </div>
+      </div>
+
+      <figure class="today">
+        <div class="today-head">
+          <span class="label">Today</span>
+          <span class="count" data-count>1,440 blocks · 14,400 TC</span>
+        </div>
+        <div class="today-body">
+          <div class="hours" aria-hidden="true"><span>00</span><span>06</span><span>12</span><span>18</span></div>
+          <div class="day" data-day role="img" aria-label="A day drawn as 1,440 squares, one for each minute's block"></div>
+        </div>
+        <figcaption>One square per minute. A day is 1,440 blocks and 14,400&nbsp;TC, sealed into one file.
+          The squares follow your clock: mainnet hasn't launched yet.</figcaption>
+      </figure>
+    </section>
+
+    <section class="block ledger" aria-labelledby="numbers">
+      <h2 id="numbers">The numbers</h2>
+      <dl>
+        <div><dt>Block time</dt><dd>1 minute</dd></div>
+        <div><dt>Reward per block</dt><dd>10 TC, never halves</dd></div>
+        <div><dt>New coins a day</dt><dd>14,400 TC</dd></div>
+        <div><dt>New coins a year</dt><dd>5,256,000 TC</dd></div>
+        <div><dt>Smallest amount</dt><dd>0.000001 TC</dd></div>
+        <div><dt>Proof of work</dt><dd>Argon2id, 4 MiB</dd></div>
+        <div><dt>Difficulty</dt><dd>adjusts every block</dd></div>
+        <div><dt>Final after</dt><dd>100 blocks</dd></div>
+        <div><dt>Premine</dt><dd>none</dd></div>
+        <div><dt>Addresses</dt><dd>tc1…</dd></div>
+      </dl>
+    </section>
+
+    <section class="block" id="how" aria-labelledby="how-title">
+      <h2 id="how-title">How it works</h2>
+      <div class="points">
+        <article class="point">
+          <h3>Mining that doesn't reward special hardware</h3>
+          <p>Every hash is an Argon2id calculation that needs 4&nbsp;MiB of fast memory. That makes custom
+            mining chips pointless and keeps graphics cards' edge small, so the computer you already own can
+            mine. Difficulty adjusts a little after every block to keep one block a minute.</p>
+        </article>
+        <article class="point">
+          <h3>A reward that stays the same</h3>
+          <p>10&nbsp;TC for every block, with no halvings and no end date: about 5.26 million TC a year.
+            That amount never changes, so as a share of all coins it gets smaller every year. The first
+            block pays an address nobody can spend, so nobody starts with coins.</p>
+        </article>
+        <article class="point">
+          <h3>Payments nobody can alter</h3>
+          <p>One payment can pay up to 255 addresses at once. Its signature covers every address, amount and
+            note, so changing any detail makes it invalid. Fees start at 0.000146&nbsp;TC for a simple
+            payment, and miners choose which payments to include.</p>
+        </article>
+        <article class="point">
+          <h3>History you can copy</h3>
+          <p>Each day of blocks is sealed into a single file, and every block carries a fingerprint of all
+            balances at the end of the previous day. New nodes download whole days and check every block in them. After 100 blocks, about
+            100 minutes, a payment can't be undone.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="block" id="try" aria-labelledby="try-title">
+      <h2 id="try-title">Try it on your computer</h2>
+      <p class="intro">Mainnet isn't live yet, but devnet is: the same rules at 60× speed, one block a second,
+        running only on your machine. You need Python 3.11 or newer.</p>
+      <ol class="steps">
+        <li>
+          <p class="step-title">Get the code</p>
+          <pre><code>git clone https://github.com/TalCash/TalCash
+cd TalCash
+pip install -e .</code></pre>
+        </li>
+        <li>
+          <p class="step-title">Create a wallet</p>
+          <pre><code>tc --network devnet wallet create</code></pre>
+          <p class="step-note">Write down the 24 words it shows you. They are the only way to recover the wallet.</p>
+        </li>
+        <li>
+          <p class="step-title">Start mining</p>
+          <pre><code>tc --network devnet node --mine</code></pre>
+        </li>
+        <li>
+          <p class="step-title">Check your balance in a second terminal</p>
+          <pre><code>tc --network devnet wallet balance</code></pre>
+          <p class="step-note">Mined coins unlock after 100 blocks, under two minutes on devnet.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="block" id="roadmap" aria-labelledby="roadmap-title">
+      <h2 id="roadmap-title">Where it stands</h2>
+      <ol class="road">
+        <li class="done">Rules, blocks and proof of work</li>
+        <li class="done">Wallet with a 24-word backup</li>
+        <li class="done">Chain with competing branches and finality</li>
+        <li class="done">Miner and waiting-payments pool</li>
+        <li class="done">Node API with live updates</li>
+        <li class="done">Peer-to-peer network and daily chunk files</li>
+        <li class="done">Protection against misbehaving peers</li>
+        <li class="now">Public testnet <span class="tag">Next</span></li>
+        <li class="later">Block explorer</li>
+        <li class="later">Independent review and final parameters</li>
+        <li class="later">Mainnet launch</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <nav class="foot-links" aria-label="Project">
+      <a href="https://github.com/TalCash/TalCash">Code on GitHub</a>
+      <a href="https://github.com/TalCash/TalCash/blob/master/docs/PROTOCOL.md">Protocol</a>
+      <a href="https://github.com/TalCash/TalCash/blob/master/SECURITY.md">Report a security problem</a>
+      <a href="https://github.com/TalCash/TalCash/blob/master/LICENSE">MIT license</a>
+    </nav>
+    <p>Official places: talcash.com and github.com/TalCash.</p>
+  </footer>
+</body>
+</html>
