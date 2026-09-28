@@ -39,7 +39,7 @@
     </a>
     <nav class="nav" aria-label="Main">
       <a href="#how">How it works</a>
-      <a href="#try">Try it</a>
+      <a href="#testnet">Testnet</a>
       <a href="#roadmap">Roadmap</a>
       <a href="https://github.com/TalCash/TalCash">GitHub</a>
     </nav>
@@ -54,8 +54,8 @@
           Every hash needs 4&nbsp;MiB of fast memory, so mining chips don't pay off and an ordinary
           CPU stays in the race.</p>
         <div class="actions">
-          <a class="button primary" href="https://github.com/TalCash/TalCash">Read the code</a>
-          <a class="button" href="https://github.com/TalCash/TalCash/blob/master/docs/PROTOCOL.md">Read the protocol</a>
+          <a class="button primary" href="#testnet">Join the testnet</a>
+          <a class="button" href="https://github.com/TalCash/TalCash">Read the code</a>
         </div>
       </div>
 
@@ -119,10 +119,11 @@
       </div>
     </section>
 
-    <section class="block" id="try" aria-labelledby="try-title">
-      <h2 id="try-title">Try it on your computer</h2>
-      <p class="intro">Mainnet isn't live yet, but devnet is: the same rules at 60× speed, one block a second,
-        running only on your machine. You need Python 3.11 or newer.</p>
+    <section class="block" id="testnet" aria-labelledby="testnet-title">
+      <h2 id="testnet-title">Join the testnet</h2>
+      <p class="intro">The public testnet has been running since 25&nbsp;September 2026 with mainnet's rules:
+        one block a minute, 10 test TC each. Test coins have no value, so it's the place to try everything.
+        You need Python 3.11 or newer.</p>
       <ol class="steps">
         <li>
           <p class="step-title">Get the code</p>
@@ -131,20 +132,26 @@ cd TalCash
 pip install -e .</code></pre>
         </li>
         <li>
-          <p class="step-title">Create a wallet</p>
-          <pre><code>tc --network devnet wallet create</code></pre>
+          <p class="step-title">Create a testnet wallet</p>
+          <pre><code>tc --network testnet wallet create</code></pre>
           <p class="step-note">Write down the 24 words it shows you. They are the only way to recover the wallet.</p>
         </li>
         <li>
-          <p class="step-title">Start mining</p>
-          <pre><code>tc --network devnet node --mine</code></pre>
+          <p class="step-title">Check your balance</p>
+          <pre><code>tc --network testnet wallet balance</code></pre>
+          <p class="step-note">No node of your own needed: the wallet asks the public node at testnet.talcash.com.
+            Payments are signed on your computer, and your keys never leave it.</p>
         </li>
         <li>
-          <p class="step-title">Check your balance in a second terminal</p>
-          <pre><code>tc --network devnet wallet balance</code></pre>
-          <p class="step-note">Mined coins unlock after 100 blocks, under two minutes on devnet.</p>
+          <p class="step-title">Mine test coins (optional)</p>
+          <pre><code>tc --network testnet node --mine</code></pre>
+          <p class="step-note">Your node finds the network by itself and pays your wallet. Mined coins unlock
+            after 100 blocks, about 100 minutes. Ctrl+C stops it.</p>
         </li>
       </ol>
+      <p class="after-steps">Watch blocks and payments arrive in the
+        <a href="https://testnet-explorer.talcash.com">testnet block explorer</a>. For a private sandbox,
+        <code>tc --network devnet node --mine</code> runs the same rules at 60× speed on your computer alone.</p>
     </section>
 
     <section class="block" id="roadmap" aria-labelledby="roadmap-title">
@@ -157,10 +164,12 @@ pip install -e .</code></pre>
         <li class="done">Node API with live updates</li>
         <li class="done">Peer-to-peer network and daily chunk files</li>
         <li class="done">Protection against misbehaving peers</li>
-        <li class="now">Public testnet <span class="tag">Next</span></li>
-        <li class="later">Block explorer</li>
+        <li class="done"><span><a href="#testnet">Public testnet</a>, running since 25 Sep 2026</span></li>
+        <li class="done"><a href="https://testnet-explorer.talcash.com">Block explorer</a></li>
+        <li class="now">Browser wallet (Chrome extension) <span class="tag">Next</span></li>
         <li class="later">Independent review and final parameters</li>
         <li class="later">Mainnet launch</li>
+        <li class="later">Phone wallet with QR and NFC payments</li>
         <li class="later">Wrapped TC on Ethereum, Solana and BNB Chain</li>
       </ol>
     </section>
@@ -170,6 +179,7 @@ pip install -e .</code></pre>
     <nav class="foot-links" aria-label="Project">
       <a href="https://github.com/TalCash/TalCash">Code on GitHub</a>
       <a href="https://github.com/TalCash/TalCash/blob/master/docs/PROTOCOL.md">Protocol</a>
+      <a href="https://testnet-explorer.talcash.com">Testnet explorer</a>
       <a href="https://github.com/TalCash/TalCash/blob/master/SECURITY.md">Report a security problem</a>
       <a href="https://github.com/TalCash/TalCash/blob/master/LICENSE">MIT license</a>
     </nav>

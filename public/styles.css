@@ -437,7 +437,7 @@ h2 {
   color: var(--ink-soft);
 }
 
-/* try it */
+/* join the testnet */
 
 .intro {
   max-width: 40em;
@@ -488,6 +488,20 @@ h2 {
   margin: 8px 0 0;
   color: var(--ink-soft);
   font-size: 0.9375rem;
+}
+
+.after-steps {
+  max-width: 46em;
+  margin: 30px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-soft);
+}
+
+.after-steps code {
+  color: var(--ink);
+  font: 400 0.9em var(--mono);
+  overflow-wrap: anywhere;
 }
 
 /* roadmap: the same three states as the day grid */
